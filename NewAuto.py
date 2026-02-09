@@ -1,4 +1,4 @@
-ElementsAndTypes = {}
+ElementsAndTypes = {}  # Dictionary to store all the elements of the equation and their types
 container={}
 
 def saveToContainer(dictionary):
@@ -19,13 +19,25 @@ def transToDictionary(Equation):
             ElementsAndTypes[i] = "unknown"
         if i=="+" or i=="-" or i=="*" or i=="/" or i=="=" or i=="^":
             ElementsAndTypes[i] = "operator"
+        elif i=="#":
+            ElementsAndTypes[i]="None"
         saveToContainer(ElementsAndTypes)
         
 def searchForUnknowns():
     ListOfUnknowns = {}
     for Element, Type in ElementsAndTypes.items():
         if Type == "unknown":
-            ListOfUnknowns[Element] = list(ElementsAndTypes.keys()).index(Element)
+            #ListOfUnknowns[Element].append(list(ElementsAndTypes.keys()).index(Element))
+            while True:
+                try:
+                    ListOfUnknowns[Element] = list(ElementsAndTypes.keys()).index(Element)
+                    if ElementsAndTypes[Element]=="unknown":
+                        ElementsAndTypes[Element]="#"
+                        break
+                    
+                except ValueError:
+                    break
+
     print("Unknown elements found: {}".format(ListOfUnknowns))
 
     
