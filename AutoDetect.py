@@ -1,9 +1,17 @@
-# def unknownOrNumber(value):
-#     try:
-#         float(value)
-#         return "number"
-#     except ValueError:
-#         return "unknown"
+unknowns=[]
+EquationElements=[]
+
+def unknownOrNumber(value):
+    if value=="+" or value=="-" or value=="*" or value=="/" or value=="=":
+        return "operator"
+    try:
+        float(value)
+        return "number"
+    except ValueError:
+        return "unknown"
+
+# def save(unknown):
+#     unknowns.append(unknown)
 
 # def linearFunction(linear):
 #     unknown_number_count = 1
@@ -16,10 +24,14 @@
 #                 y=i
 #         elif unknownOrNumber(i) == "number":
 
-def autoNaming():
+def translateEquation(Equation):          
+    for i in Equation:
+        if unknownOrNumber(i) == "unknown":
+            unknowns.append(i)
+        EquationElements.append(i)
 
 
-def linearFunction(linear):
-    for i in linear:
-        if i == "x":
-            
+
+translateEquation("y=2x+3")
+print(unknowns)
+print(EquationElements)
